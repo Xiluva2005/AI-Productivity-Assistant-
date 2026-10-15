@@ -1,0 +1,48 @@
+import streamlit as st
+from modules.email_generator import generate_email
+from modules.meeting_summarizer import summarize_meeting
+from modules.task_planner import plan_tasks
+from modules.research_assistant import research_topic
+from modules.chatbot import chat_response
+
+st.set_page_config(page_title="AI Productivity Assistant", page_icon="🤖", layout="wide")
+st.title("🤖 AI-Productivity-Assistant")
+st.caption("Automating workplace tasks with ethical AI")
+
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["📧 Email", "📝 Meeting", "✅ Planner", "🔍 Research", "💬 Chatbot"])
+
+with tab1:
+    st.subheader("Email Generation")
+    recipient = st.text_input("Recipient / Context", "Client follow-up after demo")
+    purpose = st.text_area("Purpose", "Thank them and propose next steps")
+    tone = st.selectbox("Tone", ["Professional", "Friendly", "Formal", "Concise"])
+    if st.button("Generate Email"):
+        result = generate_email(recipient, purpose, tone)
+        st.code(result)
+
+with tab2:
+    st.subheader("Meeting Summarization")
+    transcript = st.text_area("Paste transcript", height=200, placeholder="John: We agreed to launch on Friday...")
+    if st.button("Summarize"):
+        result = summarize_meeting(transcript)
+        st.json(result) if isinstance(result, dict) else st.write(result)
+
+with tab3:
+    st.subheader("Task Planning")
+    goals = st.text_area("Your goals / brain dump", "Finish project report, prepare slides, email team, research competitors")
+    if st.button("Create Plan"):
+        st.write(plan_tasks(goals))
+
+with tab4:
+    st.subheader("Research Assistance")
+    topic = st.text_input("Research Topic", "Impact of AI on remote work productivity")
+    if st.button("Research"):
+        st.write(research_topic(topic))
+
+with tab5:
+    st.subheader("Workplace Chatbot")
+    q = st.text_input("Ask anything")
+    if q:
+        st.write(chat_response(q))
+
+st.sidebar.info("Built with prompt engineering + responsible AI. See ethical_guidelines.md")
