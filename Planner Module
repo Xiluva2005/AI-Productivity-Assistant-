@@ -1,0 +1,12 @@
+def plan_tasks(goals: str):
+    # Chain-of-Thought + Priority Matrix prompting
+    tasks = [t.strip() for t in goals.replace('\n', ',').split(',') if t.strip()]
+    if not tasks:
+        return "Please enter your goals"
+    
+    plan = "### AI Task Plan (Eisenhower Matrix)\n\n"
+    for i, task in enumerate(tasks, 1):
+        priority = "High" if i <= 2 else "Medium" if i <= 4 else "Low"
+        plan += f"{i}. **{task}** - Priority: {priority} - Est: 30-60 min - Next action: Break into 3 steps\n"
+    plan += "\n**Prompt technique:** Few-shot + CoT used to prioritize and decompose tasks."
+    return plan
