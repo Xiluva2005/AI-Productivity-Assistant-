@@ -1,0 +1,56 @@
+AI-Productivity-Assistant
+An AI-powered workplace assistant that automates 5 core productivity tasks:
+
+Email Generation - context-aware professional emails
+Meeting Summarization - transcripts -> summary, decisions, action items
+Task Planning - natural language -> structured plan with priorities
+Research Assistance - topic -> summarized brief with sources
+Chatbot Interaction - general workplace Q&A assistant
+Built for the AI Productivity Project Brief.
+
+Features
+Prompt-engineered modules (zero-shot, few-shot, chain-of-thought, role-based)
+Works with OpenAI, Gemini, or local models
+Streamlit UI (no-code friendly) + Python API
+Responsible AI guardrails included
+Tech Stack
+Python 3.10+
+Streamlit for UI
+OpenAI / Google Generative AI SDKs (optional)
+Prompt engineering library: custom templates in /prompts
+Quick Start
+Clone repo:
+git clone https://github.com/YOUR_USERNAME/AI-Productivity-Assistant.git
+cd AI-Productivity-Assistant
+Install:
+pip install -r requirements.txt
+Set API key (optional - works with fallback templates):
+export OPENAI_API_KEY="sk-..."
+# or
+export GEMINI_API_KEY="..."
+Run:
+streamlit run app.py
+Project Structure
+AI-Productivity-Assistant/
+├── app.py                 # Main Streamlit app
+├── modules/               # Core task modules
+├── prompts/               # Prompt engineering templates
+├── requirements.txt
+├── ethical_guidelines.md
+└── README.md
+Prompt Engineering Showcase
+See /prompts/prompt_library.md for examples of:
+
+Role prompting
+Few-shot examples
+Chain-of-Thought for planning
+Structured output prompting (JSON)
+Ethical Use
+This project follows responsible AI principles. See ethical_guidelines.md.
+
+GitHub Setup Checklist (from brief)
+ Create GitHub account with personal email: https://github.com/signup
+ Create repository named AI-Productivity-Assistant
+ Include README
+ Upload work progressively
+License: MIT
