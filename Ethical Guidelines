@@ -1,0 +1,16 @@
+Responsible and Ethical AI Use
+Principles Applied
+Transparency: Every AI output is labeled as AI-generated draft requiring human review.
+Privacy: No meeting transcripts or emails are stored; processing is ephemeral.
+Bias Mitigation: Prompts explicitly ask for neutral, professional tone.
+Human-in-the-Loop: Email generation and task planning require user confirmation.
+Data Minimization: Only uses text provided by user, no external scraping without consent.
+Guardrails Implemented in Code
+AI DRAFT - Please review footer on emails
+Warning if sensitive data detected (e.g., credit card patterns)
+No autonomous sending of emails
+Summaries avoid hallucinating attendees/decisions not in transcript
+Tools Used
+ChatGPT / Gemini for generation
+Notion AI concept replicated for task structuring
+Prompt engineering to enforce responsible outputs
