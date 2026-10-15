@@ -1,0 +1,50 @@
+import os
+
+PROMPT_TEMPLATE = """ROLE: You are an executive communication assistant specializing in {tone} emails.
+TASK: Write an email about: {purpose}
+RECIPIENT CONTEXT: {recipient}
+CONSTRAINTS:
+- Subject line must be clear and under 8 words
+- Body under 150 words
+- Professional, inclusive language
+- End with clear CTA
+- Add footer: '[AI DRAFT - Please review before sending]'
+FORMAT:
+Subject: ...
+Body: ...
+"""
+
+def generate_email(recipient, purpose, tone="Professional"):
+    prompt = PROMPT_TEMPLATE.format(recipient=recipient, purpose=purpose, tone=tone)
+    # Try OpenAI if key exists, else fallback template
+    api_key = os.getenv("OPENAI_API_KEY")
+    if api_key:
+        try:
+            from openai import OpenAI
+            client = OpenAI(api_key=api_key)
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role":"user","content": prompt}]
+            )
+            return resp.choices[0].message.content
+        except Exception as e:
+            return f"Fallback (API error: {e})\n\n" + _fallback(recipient, purpose, tone)
+    return _fallback(recipient, purpose, tone) + f"\n\n---\nPrompt Used:\n{prompt}"
+
+def _fallback(recipient, purpose, tone):
+    return f"""Subject: Re: {recipient}
+
+Hi there,
+
+Thank you for your time regarding {recipient}.
+
+I wanted to follow up on {purpose}. Based on our discussion, I propose we align on next steps by end of week.
+
+Let me know a suitable time to connect, or feel free to share your thoughts directly.
+
+Best regards,
+Xiluva
+
+[AI DRAFT - Please review before sending]
+Tone: {tone}
+"""
